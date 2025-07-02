@@ -1,6 +1,7 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
+from snowflake.snowpark.functions import col
+#from snowflake.snowpark.context import get_active_session
 
 # Write directly to the app
 st.title(f":cup_with_straw: Customize Your Smoothy :cup_with_straw: ")
@@ -9,19 +10,11 @@ st.write(
   '''
 )
 
-
-#option =  st.selectbox(
-#    'What is your facorite fruit?',
-#    ('Banana', 'Strawberries', 'Peaches'))
-
-#st.write('Your favorite fruit is:', option)
-
-from snowflake.snowpark.functions import col
-
 name_on_order = st.text_input("Name on Smoothie:")
 st.write("The name on the smoothie will be:", name_on_order)
 
-
+cnx = st.connection("snowflake")
+session = cnx.session()
 session = get_active_session()
 
 #session.use_database("SMOOTHIES")
